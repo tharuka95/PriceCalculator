@@ -14,10 +14,10 @@ orderItems: any;
   ngOnInit(): void {
     this.orderDetails = JSON.parse(localStorage.getItem('orderData'));
     this.orderItems = JSON.parse(this.orderDetails.orderItems);
-    localStorage.removeItem('orderData');
   }
 
   goBack() {
     this.router.navigate(['productTable']);
+    localStorage.removeItem('orderData');
   }
 }
