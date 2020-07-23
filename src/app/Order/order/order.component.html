@@ -1,0 +1,53 @@
+<div class="wrapper">
+  <h1>Order Cart</h1>
+  <hr>
+        <form [formGroup]="addCartForm">
+          <div class="form-group">
+            <label for="email" class="control-label">Select Product
+              <sup class="required">*</sup>
+            </label>
+            <ngx-select-dropdown formControlName="product" [multiple]="false" [config]="config" [options]="items" [(ngModel)]="SelectedValues" ></ngx-select-dropdown>
+            <div *ngIf="(addCartForm.get('product').invalid && addCartForm.get('product').touched) || addCartForm.get('product').dirty">
+              <small *ngIf="addCartForm.get('product').errors?.required" class="text-danger">Select a product</small>
+            </div>
+          </div>
+  
+          <div class="form-group">
+            <label for="subject" class="control-label">Number of Units
+              <sup class="required">*</sup>
+            </label>
+            <input type="number" class="form-control" formControlName="units" [class.is-invalid]="addCartForm.get('units').invalid && addCartForm.get('units').touched">
+            <div *ngIf="(addCartForm.get('units').invalid && addCartForm.get('units').touched) || addCartForm.get('units').dirty">
+              <small *ngIf="addCartForm.get('units').errors?.required" class="text-danger">Number of Units Required</small>
+            </div>
+          </div>
+        </form>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" (click)="addToCart()">Add to Cart</button>
+        </div>
+<hr>
+<table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Product Name</th>
+        <th scope="col">Units</th>
+        <th scope="col">Total Price</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tfoot>
+        <tr>
+        <th>Total Amount</th>
+        <th>$ {{totalAmount}}</th>
+        <th colspan="2"><button type="button" class="btn btn-primary order-place" (click)="placeOrder()" [disabled]="totalAmount <= 0">Place Order</button></th>
+        </tr>
+    </tfoot>
+    <tbody>
+      <tr *ngFor="let item of cartItems">
+        <th scope="row">{{item.productName}}</th>
+        <td><app-quantity-selector [quantity]="item.units"  (quantityEmit)="getQuantity($event, item)"></app-quantity-selector></td>
+        <td>$ {{item.totalPrice}}</td>
+        <td><button type="button" class="btn btn-primary" (click)="removeItem(item)">Remove</button></td>
+      </tr>
+    </tbody>
+  </table>

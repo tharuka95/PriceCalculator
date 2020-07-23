@@ -1,0 +1,30 @@
+<div class="wrapper">
+    <h1>Order Summery</h1>
+    <hr>
+    <div class="details">
+        <h5>Order ID :{{orderDetails.orderId}}</h5>
+    </div>
+  <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">Product Name</th>
+          <th scope="col">Units</th>
+          <th scope="col">Total Price</th>
+        </tr>
+      </thead>
+      <tfoot>
+          <tr col-span="3">
+          <th>Total Amount</th>
+          <th>$ {{orderDetails.totalAmount}}</th>
+          </tr>
+      </tfoot>
+      <tbody>
+        <tr *ngFor="let item of orderItems">
+          <th scope="row">{{item.productName}}</th>
+          <td>{{item.units}}</td>
+          <td>$ {{item.totalPrice}}</td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <button type="button" class="btn btn-primary" (click)="goBack()">Go Back To Product List</button>

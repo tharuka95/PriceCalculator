@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "PriceCalculator"
+    }
+  },
+  "defaultProject": "PriceCalculator",
+  "cli": {
+    "analytics": false
+  }
 }

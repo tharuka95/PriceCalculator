@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+// regular style toast 
+@import '~ngx-toastr/toastr';
+@import './assets/bootstrap.min.css';
+
+.wrapper {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 10%;
+    
+}
